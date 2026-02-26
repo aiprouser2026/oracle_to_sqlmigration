@@ -1,0 +1,162 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="OracleToSQL.GUI.MainWindow"
+        Title="Oracle to SQL Server Migration Tool"
+        Width="900" Height="700"
+        MinWidth="800" MinHeight="600">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Grid.Row="0"
+                   Text="Oracle to SQL Server Migration Tool"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   Margin="0,0,0,20"/>
+
+        <!-- Oracle Connection -->
+        <StackPanel Grid.Row="1" Margin="0,0,0,15">
+            <TextBlock Text="Oracle Connection" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
+            <TextBox Name="OracleConnectionTextBox"
+                     Watermark="Data Source=host:1521/ORCL;User Id=user;Password=pass;"
+                     Height="35"/>
+            <Button Name="TestOracleButton"
+                    Content="Test Oracle Connection"
+                    Width="200"
+                    HorizontalAlignment="Left"
+                    Margin="0,5,0,0"
+                    Click="TestOracleButton_Click"/>
+        </StackPanel>
+
+        <!-- SQL Server Connection -->
+        <StackPanel Grid.Row="2" Margin="0,0,0,15">
+            <TextBlock Text="SQL Server Connection" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
+            <TextBox Name="SqlServerConnectionTextBox"
+                     Watermark="Server=host;Database=db;User Id=sa;Password=pass;TrustServerCertificate=True;"
+                     Height="35"/>
+            <Button Name="TestSqlServerButton"
+                    Content="Test SQL Server Connection"
+                    Width="200"
+                    HorizontalAlignment="Left"
+                    Margin="0,5,0,0"
+                    Click="TestSqlServerButton_Click"/>
+        </StackPanel>
+
+        <!-- Migration Options -->
+        <StackPanel Grid.Row="3" Margin="0,0,0,15">
+            <TextBlock Text="Migration Options" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                    <TextBlock Text="Parallel Tables:" Margin="0,0,0,5"/>
+                    <NumericUpDown Name="ParallelNumeric" Value="4" Minimum="1" Maximum="16" Height="35"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="0,0,10,0">
+                    <TextBlock Text="Batch Size:" Margin="0,0,0,5"/>
+                    <NumericUpDown Name="BatchSizeNumeric" Value="10000" Minimum="1000" Maximum="100000" Increment="1000" Height="35"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="Migration Type:" Margin="0,0,0,5"/>
+                    <ComboBox Name="MigrationTypeCombo" SelectedIndex="2" Height="35">
+                        <ComboBoxItem Content="Schema Only"/>
+                        <ComboBoxItem Content="Data Only"/>
+                        <ComboBoxItem Content="Full Migration"/>
+                    </ComboBox>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+
+        <!-- Action Buttons and Progress -->
+        <Grid Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Buttons -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
+                <Button Name="AnalyzeButton"
+                        Content="1. Analyze Schema"
+                        Width="150"
+                        Height="40"
+                        Margin="0,0,10,0"
+                        Click="AnalyzeButton_Click"/>
+                <Button Name="MigrateButton"
+                        Content="2. Start Migration"
+                        Width="150"
+                        Height="40"
+                        Margin="0,0,10,0"
+                        Click="MigrateButton_Click"/>
+                <Button Name="ValidateButton"
+                        Content="3. Validate"
+                        Width="150"
+                        Height="40"
+                        Margin="0,0,10,0"
+                        Click="ValidateButton_Click"/>
+                <Button Name="CancelButton"
+                        Content="Cancel"
+                        Width="100"
+                        Height="40"
+                        Click="CancelButton_Click"
+                        IsEnabled="False"/>
+            </StackPanel>
+
+            <!-- Progress -->
+            <StackPanel Grid.Row="1" Margin="0,0,0,10">
+                <TextBlock Name="StatusLabel" Text="Ready" FontWeight="Bold" Margin="0,0,0,5"/>
+                <ProgressBar Name="ProgressBar"
+                             Height="25"
+                             Minimum="0"
+                             Maximum="100"
+                             Value="0"/>
+                <TextBlock Name="ProgressTextLabel"
+                           Text="0% - No operation in progress"
+                           Margin="0,5,0,0"
+                           FontSize="12"/>
+            </StackPanel>
+
+            <!-- Log Output -->
+            <Border Grid.Row="2"
+                    BorderBrush="Gray"
+                    BorderThickness="1"
+                    CornerRadius="5"
+                    Padding="10">
+                <ScrollViewer>
+                    <TextBlock Name="LogTextBlock"
+                               Text="Log output will appear here..."
+                               TextWrapping="Wrap"
+                               FontFamily="Consolas,Monaco,Courier New"/>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+
+        <!-- Status Bar -->
+        <Border Grid.Row="5"
+                Background="#F0F0F0"
+                Padding="10"
+                Margin="0,15,0,0"
+                CornerRadius="5">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Name="ConnectionStatusLabel"
+                           Text="Oracle: Not connected | SQL Server: Not connected"
+                           FontSize="12"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

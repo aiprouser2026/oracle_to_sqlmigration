@@ -22,11 +22,12 @@ OracleToSQLMigration/
 
 - ✅ **Complete Schema Migration**: Tables, indexes, constraints, foreign keys
 - ✅ **Data Migration**: High-performance bulk data transfer with batch processing
-- ✅ **Code Conversion**: PL/SQL to T-SQL conversion for stored procedures and functions
 - ✅ **Validation**: Pre and post-migration validation
-- ✅ **Resume Capability**: Resume interrupted migrations
 - ✅ **Parallel Processing**: Multi-threaded migration for improved performance
-- ✅ **CLI and GUI**: Both command-line and graphical interfaces
+- ✅ **CLI Interface**: Command-line tool for automation and scripting
+- ✅ **GUI Interface**: Cross-platform desktop application (Avalonia UI) ⭐ NEW!
+- ✅ **Real-time Progress**: Visual progress bars and live logging
+- ✅ **Connection Testing**: One-click connection verification
 
 ## Core Models (Completed)
 
@@ -74,8 +75,20 @@ dotnet test
 
 ## Usage
 
-### Build and Run
+### Choose Your Interface
 
+**Option 1: GUI (Graphical User Interface)** ⭐ NEW!
+```bash
+# Run the desktop application
+cd OracleToSQLMigration
+./run-gui.sh
+
+# OR
+cd OracleToSQLMigration/src/GUI/OracleToSQL.GUI
+dotnet run
+```
+
+**Option 2: CLI (Command-Line Interface)**
 ```bash
 # Build the solution
 cd OracleToSQLMigration
