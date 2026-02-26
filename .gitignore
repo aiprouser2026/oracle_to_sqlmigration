@@ -1,0 +1,31 @@
+# Build results
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+*.dll
+*.exe
+*.pdb
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+
+# Visual Studio
+.vs/
+.vscode/
+
+# NuGet
+*.nupkg
+packages/
+
+# Generated files
+*.log
+migration_output/
+scripts/
+schema.json
+
+# OS files
+.DS_Store
+Thumbs.db
